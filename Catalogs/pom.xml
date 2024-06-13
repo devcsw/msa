@@ -125,6 +125,23 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- OpenFeign 적용 -->
+		<!-- OpenFeign 은 MSA 환경에서 서비스 간 통신을 하기 위한 선언적(Declarative) HTTP 
+		Client 도구이다. 선언적(Declarative)이란 어노테이션을 사용한다는 것으로 기존의
+		RestTemplate 과 동일하게 작동하지만 인터페이스와 그에 따른 어노테이션을 정의하는
+		것만으로 구현할 수 있어 보다 간소하게 구성할 수 있다. OpenFeign 을 사용하기 위해서
+		라이브러리와 설정을 추가하고 필요한 클래스를 작성한다.
+		-->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+			<version>3.1.8</version>
+		</dependency>
+		<!-- Spring WebFlux 추가-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webflux</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
