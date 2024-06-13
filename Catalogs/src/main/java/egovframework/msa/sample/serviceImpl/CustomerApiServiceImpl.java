@@ -5,7 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import egovframework.msa.sample.service.CustomerApiService;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 @Service
+@CircuitBreaker(name="getCustomerDetail", fallbackMethod="getCustomerDetailFallback")
 public class CustomerApiServiceImpl implements CustomerApiService {
 	private static final Logger log = LoggerFactory.getLogger(CustomerApiServiceImpl.class);
 	private final WebClient.Builder webClient;
@@ -23,5 +25,9 @@ public class CustomerApiServiceImpl implements CustomerApiService {
 		.toStream()
 		.findFirst()
 		.orElse(null);
+	}
+	public String getCustomerDetailFallback(String customerId, Throwable ex) {
+		log.info("Error:" + ex.getMessage());
+		return "고객정보 조회가 지연되고 있습니다.";
 	}
 }

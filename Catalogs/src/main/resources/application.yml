@@ -1,5 +1,19 @@
 server:
  port: 8081
+
 spring:
- application:
-  name: catalog
+  application:
+    name: catalog
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        minimumNumberOfCalls: 10
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10000
+    instances:
+      getCustomerDetail:
+        base-config: default
