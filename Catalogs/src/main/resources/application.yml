@@ -1,19 +1,26 @@
 server:
- port: 8081
+  port: 0 #random port
 
 spring:
   application:
     name: catalog
 
-resilience4j:
-  circuitbreaker:
-    configs:
-      default:
-        minimumNumberOfCalls: 10
-        slidingWindowType: COUNT_BASED
-        slidingWindowSize: 10
-        failureRateThreshold: 50
-        waitDurationInOpenState: 10000
+resilience4:
+  circuitbreake:
+    config:
+      defaul:
+        minimumNumberOfCalls: 0
+        slidingWindowType: COUNT_BASD
+        slidingWindowSize: 0
+        failureRateThreshold: 0
+        waitDurationInOpenState: 1000
     instances:
       getCustomerDetail:
         base-config: default
+        
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka  #default address
